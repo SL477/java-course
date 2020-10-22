@@ -4,6 +4,9 @@ import java.util.Scanner;  // Needed for the Scanner class to read input
 
 public class custom_order {
 
+  static double totalCost;
+  static String addOnList = "";
+
     // STEP 1 PRINTING HELLO WORLD TO CONSOLE
     public static void main(String[] args) {
         
@@ -50,9 +53,9 @@ public class custom_order {
       System.out.println("     Cake                    1          $15");
       System.out.println("  Set of Cupcakes    6             $15");
       System.out.println("_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _");
-      System.out.println("Frostings (vanilla, chocolate, strawberry, coco)");
-      System.out.println("Fillings (mocha, mint, lemon, caramel, vanilla)");
-      System.out.println("Toppings (sprinkles, cinnamon, cocoa, nuts)");
+      System.out.println("Frostings (vanilla, chocolate, strawberry, coco) $0.50");
+      System.out.println("Fillings (mocha, mint, lemon, caramel, vanilla) $1");
+      System.out.println("Toppings (sprinkles, cinnamon, cocoa, nuts) $2");
       System.out.println("________________________________________________");
 
     // TEST CODE     
@@ -60,10 +63,6 @@ public class custom_order {
     // STEP 5 PROMPT USER TO ORDER
       System.out.println("Do you want CUPCAKES or a CAKE?");
       itemOrder = keyboard.nextLine();
-  
-	  
-	  
-	  
       
     // TEST CODE
       
@@ -71,7 +70,9 @@ public class custom_order {
       System.out.println("What type of FROSTING do you want? ");
       System.out.println("Vanilla, Chocolate, Strawberry or Coco");
       frostingType = keyboard.nextLine();
-	 
+      if (frostingType != "no") {
+        addItem(frostingType, 0.5);
+      }
 	 
       
     //TEST CODE
@@ -80,7 +81,9 @@ public class custom_order {
       System.out.println("What type of FILLING do you want? ");
       System.out.println("Mocha, Mint, Lemon, Caramel or Raspberry");
       fillingType = keyboard.nextLine();
-	  
+      if (fillingType != "no") {
+        addItem(fillingType, 1);
+      }
       
     // TEST CODE
       
@@ -88,7 +91,9 @@ public class custom_order {
       System.out.println("What type of TOPPINGS do you want? ");
       System.out.println("Sprinkles, Cinnamon, Cocoa, Nuts");
       toppings = keyboard.nextLine();
-      
+      if (toppings != "no") {
+        addItem(toppings, 2);
+      }
       
     // TEST CODE
       
@@ -97,13 +102,14 @@ public class custom_order {
       System.out.println(firstName + ", your order is as follows: ");
       System.out.println("________________________________________");
       System.out.println("Item Ordered: " + itemOrder);
-      System.out.println("Frosting: " + frostingType);
-      System.out.println("Filling: " + fillingType);
-      System.out.println("Toppings: " + toppings);
+      //System.out.println("Frosting: " + frostingType);
+      //System.out.println("Filling: " + fillingType);
+      //System.out.println("Toppings: " + toppings);
+      System.out.println(addOnList);
       System.out.println("________________________________________");
     
     // TEST CODE
-      
+      cost += totalCost;
     // STEP 10 DISPLAY COST AND SALES TAX
       System.out.printf("The cost of your order is: $%.2f\n", cost);
       // %.2f means decimal rounded to 2 places
@@ -111,4 +117,12 @@ public class custom_order {
       System.out.printf("The tax is $%.2f\n", tax);
       System.out.printf("The total due is $%.2f\n", (tax + cost));
     }   
+
+    static void addItem(String item, double cost) {
+      totalCost += cost;
+      if (addOnList != "") {
+        addOnList += ", ";
+      }
+      addOnList += item;
+    }
 }
